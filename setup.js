@@ -66,9 +66,9 @@ async function runRepoSteps(repo) {
   console.log(`\n=== Setting up ${repo.name} in parallel ===`);
   const cwd = path.resolve(repo.folder);
   const platform = os.platform();
-  const shPath = path.join(cwd, 'test.sh');
+  const shPath = path.join(cwd, 'newTerminal.sh');
 
-  // Generate test.sh content
+  // Generate newTerminal.sh content
   let shContent = '#!/bin/bash\n';
   if (platform === 'darwin') {
     shContent += `osascript -e 'tell app "Terminal" to activate' -e 'tell app "Terminal" to do script "cd \\"${cwd}\\" && ${repo.steps.map(s => s.command).join(' && ')}"'\n`;
@@ -78,11 +78,11 @@ async function runRepoSteps(repo) {
     throw new Error('Unsupported OS');
   }
 
-  // Write test.sh
+  // Write newTerminal.sh
   fs.writeFileSync(shPath, shContent, { mode: 0o755 }); // Make executable
   console.log(`Generated ${shPath} for ${repo.name}`);
 
-  // Run test.sh in a new terminal
+  // Run newTerminal.sh in a new terminal
   return runInNewTerminal(`bash ${shPath}`, cwd);
 }
 
@@ -105,7 +105,7 @@ async function main() {
   await Promise.all(selectedRepos.map(async (repo) => {
     try {
       await cloneRepo(repo);
-      await runRepoSteps(repo); // Opens a new terminal for test.sh, which opens another for steps
+      await runRepoSteps(repo); // Opens a new terminal for newTerminal.sh, which opens another for steps
       console.log(`Finished setting up ${repo.name}`);
     } catch (error) {
       console.error(`Error setting up ${repo.name}:`, error.message);
