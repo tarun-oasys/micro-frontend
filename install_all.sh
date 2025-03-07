@@ -57,12 +57,12 @@ if [ ! -d "$HOME/.nvm" ]; then
     
     # Load nvm
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \ . "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 fi
 
 # Ensure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \ . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Install specific Node.js version
 nvm install 16.20.2
@@ -81,6 +81,14 @@ fi
 npm_version=$(npm -v)
 echo "npm version: $npm_version"
 
+# Install Yarn globally
+echo "Installing Yarn globally..."
+npm install -g yarn
+
+# Verify Yarn installation
+yarn_version=$(yarn -v)
+echo "Yarn version: $yarn_version"
+
 # Install Grunt CLI globally
 echo "Installing Grunt CLI globally..."
 npm install -g grunt-cli
@@ -88,14 +96,6 @@ npm install -g grunt-cli
 # Verify Grunt CLI installation
 grunt_version=$(grunt --version)
 echo "Grunt CLI version: $grunt_version"
-
-# Install Yarn globally
-echo "Installing Yarn..."
-npm install -g yarn
-
-# Verify Yarn installation
-yarn_version=$(yarn -v)
-echo "Yarn version: $yarn_version"
 
 echo "All installations completed successfully!"
 
