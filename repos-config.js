@@ -91,4 +91,22 @@ module.exports = [
       },
     ],
   },
+  {
+      name: "oa-commons-ui",
+      gitUrl: "git@gitlab.oneassist.in:ApplicationEngineering/oa-commons-ui.git",
+      folder: "oa-commons-ui",
+      steps: []
+    },
+    {
+      name: "oa-componentbook",
+      gitUrl: "git@gitlab.oneassist.in:ApplicationEngineering/oa-componentbook.git",
+      folder: "oa-componentbook",
+      steps: [{
+        command: "npm install",
+        newTerminal: false,
+      },{
+        command: "npm run storybook",
+        newTerminal: true,
+      },]
+    },
 ];
